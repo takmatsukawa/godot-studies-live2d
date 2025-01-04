@@ -48,3 +48,4 @@ offset_bottom = 497.0
 initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="touched" from="Mao" to="." method="_on_mao_touched"]
+[connection signal="state_entered" from="StateChart/DialogueMode/Chatting" to="." method="_on_chatting_state_entered"]
