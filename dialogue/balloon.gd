@@ -7,6 +7,8 @@ extends CanvasLayer
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
 
+signal dialogue_finished
+
 ## The dialogue resource
 var resource: DialogueResource
 
@@ -33,6 +35,7 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
+			dialogue_finished.emit()
 			queue_free()
 			return
 

@@ -8,4 +8,10 @@ const Balloon = preload("res://dialogue/balloon.tscn")
 func _on_mao_touched() -> void:
 	var balloon: Node = Balloon.instantiate()
 	get_tree().current_scene.add_child(balloon)
+	balloon.dialogue_finished.connect(_on_balloon_dialogue_finished)
 	balloon.start(dialogue_resource, dialogue_start)
+	
+	$StateChart.send_event("dialogue_started")
+
+func _on_balloon_dialogue_finished() -> void:
+	$StateChart.send_event("dialogue_finished")

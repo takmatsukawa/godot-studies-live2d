@@ -1,13 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5tbifnp0jdpa"]
+[gd_scene load_steps=9 format=3 uid="uid://b5tbifnp0jdpa"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_6ypxn"]
 [ext_resource type="PackedScene" uid="uid://bch3cadf4ysrf" path="res://mao.tscn" id="1_earut"]
 [ext_resource type="Resource" uid="uid://5wje0b3sbgip" path="res://dialogue/main.dialogue" id="2_l5f72"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_uaf7l"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_u5fqa"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_e7jgh"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_rscbc"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_ktraq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6ypxn")
 dialogue_resource = ExtResource("2_l5f72")
 
 [node name="Mao" parent="." instance=ExtResource("1_earut")]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_uaf7l")
+
+[node name="DialogueMode" type="Node" parent="StateChart"]
+script = ExtResource("5_u5fqa")
+initial_state = NodePath("NoChat")
+
+[node name="NoChat" type="Node" parent="StateChart/DialogueMode"]
+script = ExtResource("6_e7jgh")
+
+[node name="To Chatting" type="Node" parent="StateChart/DialogueMode/NoChat"]
+script = ExtResource("7_rscbc")
+to = NodePath("../../Chatting")
+event = &"dialogue_started"
+delay_in_seconds = "0.0"
+
+[node name="Chatting" type="Node" parent="StateChart/DialogueMode"]
+script = ExtResource("6_e7jgh")
+
+[node name="To NoChat" type="Node" parent="StateChart/DialogueMode/Chatting"]
+script = ExtResource("7_rscbc")
+to = NodePath("../../NoChat")
+event = &"dialogue_finished"
+delay_in_seconds = "0.0"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("8_ktraq")]
+offset_left = 831.0
+offset_top = 24.0
+offset_right = 1125.0
+offset_bottom = 497.0
+initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="touched" from="Mao" to="." method="_on_mao_touched"]
