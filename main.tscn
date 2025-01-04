@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5tbifnp0jdpa"]
+[gd_scene load_steps=4 format=3 uid="uid://b5tbifnp0jdpa"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_6ypxn"]
 [ext_resource type="PackedScene" uid="uid://bch3cadf4ysrf" path="res://mao.tscn" id="1_earut"]
+[ext_resource type="Resource" uid="uid://5wje0b3sbgip" path="res://dialogue/main.dialogue" id="2_l5f72"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_6ypxn")
+dialogue_resource = ExtResource("2_l5f72")
 
 [node name="Mao" parent="." instance=ExtResource("1_earut")]
+
+[connection signal="touched" from="Mao" to="." method="_on_mao_touched"]

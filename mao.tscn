@@ -23,9 +23,9 @@ anim_loop = false
 anim_loop_fade_in = true
 anim_expression = ""
 anim_motion = ""
-ParamAngleX = 3.89129
-ParamAngleY = -3.98479
-ParamAngleZ = 0.381707
+ParamAngleX = 4.18782
+ParamAngleY = -4.0
+ParamAngleZ = 0.657255
 ParamCheek = 0.0
 ParamFaceInkOn = 0.0
 ParamEyeLOpen = 1.0
@@ -55,10 +55,10 @@ ParamMouthUp = 1.0
 ParamMouthDown = 0.0
 ParamMouthAngry = 0.0
 ParamMouthAngryLine = 0.0
-ParamBodyAngleX = 1.77513
+ParamBodyAngleX = 1.7566
 ParamBodyAngleY = 0.0
 ParamBodyAngleZ = 0.0
-ParamBreath = 0.0346003
+ParamBreath = 0.0235532
 ParamLeftShoulderUp = 0.0
 ParamRightShoulderUp = 0.0
 ParamArmLA01 = 0.0
@@ -86,25 +86,25 @@ ParamHandRB = 0.0
 ParamAllX = 0.0
 ParamAllY = 0.0
 ParamAllRotate = 0.0
-ParamHairFront = 0.0037838
-ParamHairSideL = 0.00524754
-ParamHairSideR = 0.00524754
-ParamHairBack = 0.00568045
-ParamHairBackR = 0.00500917
-ParamHairBackL = 0.00500917
-ParamoHairMesh = 0.00528983
-ParamHairFrontFuwa = -0.00282255
-ParamHairSideFuwa = -0.0099674
-ParamHairBackFuwa = -0.00815491
-ParamWing = -0.00573559
-ParamRibbon = -0.00181304
-ParamHatBrim = -0.00231058
-ParamHatTop = 1.13011e-05
-ParamAccessory1 = -0.00223409
-ParamAccessory2 = 0.00233887
-ParamString = -0.00129749
-ParamRobeL = -0.00144406
-ParamRobeR = -0.00144406
+ParamHairFront = 0.00523875
+ParamHairSideL = 0.00483136
+ParamHairSideR = 0.00483136
+ParamHairBack = 0.00639199
+ParamHairBackR = 0.00531489
+ParamHairBackL = 0.00531489
+ParamoHairMesh = 0.00723094
+ParamHairFrontFuwa = -0.00409737
+ParamHairSideFuwa = -0.00774152
+ParamHairBackFuwa = -0.0105692
+ParamWing = -0.00334377
+ParamRibbon = 0.000302779
+ParamHatBrim = -0.00212228
+ParamHatTop = 0.00425889
+ParamAccessory1 = -0.0023168
+ParamAccessory2 = 0.00242045
+ParamString = -0.00134593
+ParamRobeL = -0.0015142
+ParamRobeR = -0.0015142
 ParamRobeFuwa = 0.0
 ParamHeartMissOn = 0.0
 ParamHeartBackMissOn = 0.0
@@ -197,6 +197,8 @@ render_target_update_mode = 4
 script = ExtResource("2_yrt8h")
 param_mouth_name = "ParamA"
 
+[node name="GDCubismEffectHitArea" type="GDCubismEffectHitArea" parent="Sprite2D/GDCubismUserModel"]
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMicrophone_crue8")
 autoplay = true
@@ -205,3 +207,4 @@ bus = &"Voice"
 [connection signal="cubism_init" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_init"]
 [connection signal="cubism_process" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_process"]
 [connection signal="cubism_term" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_term"]
+[connection signal="hit_area_entered" from="Sprite2D/GDCubismUserModel/GDCubismEffectHitArea" to="." method="_on_gd_cubism_effect_hit_area_hit_area_entered"]
