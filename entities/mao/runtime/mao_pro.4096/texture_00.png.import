@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl32bbmfvfj83"
-path="res://.godot/imported/texture_00.png-a15428187785bbd7feffc60c0b2bf792.ctex"
+path="res://.godot/imported/texture_00.png-818c05251ecf9b84dbf28e80a600afc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/mao_pro_jp/runtime/mao_pro.4096/texture_00.png"
-dest_files=["res://.godot/imported/texture_00.png-a15428187785bbd7feffc60c0b2bf792.ctex"]
+source_file="res://entities/mao/runtime/mao_pro.4096/texture_00.png"
+dest_files=["res://.godot/imported/texture_00.png-818c05251ecf9b84dbf28e80a600afc7.ctex"]
 
 [params]
 

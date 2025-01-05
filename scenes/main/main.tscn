@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5tbifnp0jdpa"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_qh51d"]
+[ext_resource type="Resource" uid="uid://5wje0b3sbgip" path="res://scenes/main/main.dialogue" id="2_8r7mx"]
+[ext_resource type="PackedScene" uid="uid://bch3cadf4ysrf" path="res://entities/mao/mao.tscn" id="3_kkgtg"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_elrsr"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_enk77"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_viyqp"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_vw2ur"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_ksfxu"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m24j2"]
+viewport_path = NodePath("GDCubismUserModel")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_qh51d")
+dialogue_resource = ExtResource("2_8r7mx")
+
+[node name="Mao" parent="." instance=ExtResource("3_kkgtg")]
+position = Vector2(298, 906)
+texture = SubResource("ViewportTexture_m24j2")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_elrsr")
+
+[node name="DialogueMode" type="Node" parent="StateChart"]
+script = ExtResource("5_enk77")
+initial_state = NodePath("NoChat")
+
+[node name="NoChat" type="Node" parent="StateChart/DialogueMode"]
+script = ExtResource("6_viyqp")
+
+[node name="To Chatting" type="Node" parent="StateChart/DialogueMode/NoChat"]
+script = ExtResource("7_vw2ur")
+to = NodePath("../../Chatting")
+event = &"dialogue_started"
+delay_in_seconds = "0.0"
+
+[node name="Chatting" type="Node" parent="StateChart/DialogueMode"]
+script = ExtResource("6_viyqp")
+
+[node name="To NoChat" type="Node" parent="StateChart/DialogueMode/Chatting"]
+script = ExtResource("7_vw2ur")
+to = NodePath("../../NoChat")
+event = &"dialogue_finished"
+delay_in_seconds = "0.0"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("8_ksfxu")]
+offset_left = 1717.0
+offset_top = 30.0
+offset_right = -31.0
+offset_bottom = -849.0
+initial_node_to_watch = NodePath("../StateChart")
+
+[connection signal="touched" from="Mao" to="." method="_on_mao_touched"]
+[connection signal="state_entered" from="StateChart/DialogueMode/Chatting" to="." method="_on_chatting_state_entered"]

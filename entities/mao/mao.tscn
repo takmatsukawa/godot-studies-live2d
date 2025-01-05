@@ -1,31 +1,31 @@
 [gd_scene load_steps=9 format=3 uid="uid://bch3cadf4ysrf"]
 
-[ext_resource type="Script" path="res://mao.gd" id="1_6jjbm"]
+[ext_resource type="Script" path="res://entities/mao/mao.gd" id="1_6jjbm"]
 [ext_resource type="Script" path="res://gd_cubism_effect_custom.gd" id="2_yrt8h"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_la044"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_tdgs0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_gb1qb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_2d7xs"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kebk5"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xalg0"]
 viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_crue8"]
 
 [node name="Mao" type="Sprite2D"]
 position = Vector2(938, 592)
-texture = SubResource("ViewportTexture_kebk5")
+texture = SubResource("ViewportTexture_xalg0")
 script = ExtResource("1_6jjbm")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
-assets = "res://models/mao_pro_jp/runtime/mao_pro.model3.json"
+assets = "res://entities/mao/runtime/mao_pro.model3.json"
 anim_loop = false
 anim_loop_fade_in = true
 anim_expression = ""
 anim_motion = ""
-ParamAngleX = 6.36697
-ParamAngleY = -2.38294
-ParamAngleZ = 0.423764
+ParamAngleX = 4.10822
+ParamAngleY = -1.60413
+ParamAngleZ = -4.35603
 ParamCheek = 0.0
 ParamFaceInkOn = 0.0
 ParamEyeLOpen = 1.0
@@ -55,10 +55,10 @@ ParamMouthUp = 1.0
 ParamMouthDown = 0.0
 ParamMouthAngry = 0.0
 ParamMouthAngryLine = 0.0
-ParamBodyAngleX = -0.681352
+ParamBodyAngleX = -1.96776
 ParamBodyAngleY = 0.0
 ParamBodyAngleZ = 0.0
-ParamBreath = 0.382783
+ParamBreath = 0.498509
 ParamLeftShoulderUp = 0.0
 ParamRightShoulderUp = 0.0
 ParamArmLA01 = 0.0
@@ -86,25 +86,25 @@ ParamHandRB = 0.0
 ParamAllX = 0.0
 ParamAllY = 0.0
 ParamAllRotate = 0.0
-ParamHairFront = 0.006305
-ParamHairSideL = 0.00631263
-ParamHairSideR = 0.00631263
-ParamHairBack = 0.00648997
-ParamHairBackR = 0.00627533
-ParamHairBackL = 0.00627533
-ParamoHairMesh = 0.00886775
-ParamHairFrontFuwa = -0.000710096
-ParamHairSideFuwa = 0.000474702
-ParamHairBackFuwa = -0.000532359
-ParamWing = 0.00543968
-ParamRibbon = 0.00293762
-ParamHatBrim = 0.00240185
-ParamHatTop = 0.00385234
-ParamAccessory1 = 0.0046753
-ParamAccessory2 = -0.00471227
-ParamString = 0.00281605
-ParamRobeL = 0.00336615
-ParamRobeR = 0.00336615
+ParamHairFront = -0.0172643
+ParamHairSideL = -0.0169824
+ParamHairSideR = -0.0169824
+ParamHairBack = -0.0191828
+ParamHairBackR = -0.0178619
+ParamHairBackL = -0.0178619
+ParamoHairMesh = -0.0181749
+ParamHairFrontFuwa = 0.000275293
+ParamHairSideFuwa = 0.00129913
+ParamHairBackFuwa = 0.000898544
+ParamWing = 0.00284459
+ParamRibbon = 0.00109794
+ParamHatBrim = 0.00195434
+ParamHatTop = -0.00202409
+ParamAccessory1 = 0.000821416
+ParamAccessory2 = -0.000939037
+ParamString = 0.00044125
+ParamRobeL = 0.000366405
+ParamRobeR = 0.000366405
 ParamRobeFuwa = 0.0
 ParamHeartMissOn = 0.0
 ParamHeartBackMissOn = 0.0
