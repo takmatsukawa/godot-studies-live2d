@@ -4,28 +4,24 @@
 [ext_resource type="Script" path="res://gd_cubism_effect_custom.gd" id="2_yrt8h"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kebk5"]
-viewport_path = NodePath("Sprite2D/GDCubismUserModel")
+viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_crue8"]
 
-[node name="Mao" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Mao" type="Sprite2D"]
+position = Vector2(938, 592)
+texture = SubResource("ViewportTexture_kebk5")
 script = ExtResource("1_6jjbm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(528, 320)
-texture = SubResource("ViewportTexture_kebk5")
-
-[node name="GDCubismUserModel" type="GDCubismUserModel" parent="Sprite2D"]
+[node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
 assets = "res://models/mao_pro_jp/runtime/mao_pro.model3.json"
 anim_loop = false
 anim_loop_fade_in = true
 anim_expression = ""
 anim_motion = ""
-ParamAngleX = 4.53213
-ParamAngleY = 3.72759
-ParamAngleZ = 3.46667
+ParamAngleX = 6.80481
+ParamAngleY = -3.45866
+ParamAngleZ = 4.9106
 ParamCheek = 0.0
 ParamFaceInkOn = 0.0
 ParamEyeLOpen = 1.0
@@ -55,10 +51,10 @@ ParamMouthUp = 1.0
 ParamMouthDown = 0.0
 ParamMouthAngry = 0.0
 ParamMouthAngryLine = 0.0
-ParamBodyAngleX = 0.539131
+ParamBodyAngleX = 1.99377
 ParamBodyAngleY = 0.0
 ParamBodyAngleZ = 0.0
-ParamBreath = 0.491602
+ParamBreath = 8.50856e-05
 ParamLeftShoulderUp = 0.0
 ParamRightShoulderUp = 0.0
 ParamArmLA01 = 0.0
@@ -86,25 +82,25 @@ ParamHandRB = 0.0
 ParamAllX = 0.0
 ParamAllY = 0.0
 ParamAllRotate = 0.0
-ParamHairFront = 0.0234799
-ParamHairSideL = -0.0005361
-ParamHairSideR = -0.0005361
-ParamHairBack = 0.00253414
-ParamHairBackR = 0.0012328
-ParamHairBackL = 0.0012328
-ParamoHairMesh = -0.0198277
-ParamHairFrontFuwa = 0.0112336
-ParamHairSideFuwa = -0.0274629
-ParamHairBackFuwa = -0.0559125
-ParamWing = -0.0536405
-ParamRibbon = 0.027297
-ParamHatBrim = 0.0139772
-ParamHatTop = -0.0111736
-ParamAccessory1 = -0.00184543
-ParamAccessory2 = 0.00235626
-ParamString = -0.00144114
-ParamRobeL = -0.00278957
-ParamRobeR = -0.00278957
+ParamHairFront = 0.0207118
+ParamHairSideL = 0.0203922
+ParamHairSideR = 0.0203922
+ParamHairBack = 0.0205982
+ParamHairBackR = 0.0203996
+ParamHairBackL = 0.0203996
+ParamoHairMesh = 0.0223184
+ParamHairFrontFuwa = -0.00423503
+ParamHairSideFuwa = -0.00501663
+ParamHairBackFuwa = -0.00999493
+ParamWing = -0.00468961
+ParamRibbon = -0.0027555
+ParamHatBrim = -0.00440249
+ParamHatTop = 0.00356815
+ParamAccessory1 = -0.000309692
+ParamAccessory2 = 0.000429825
+ParamString = -0.000134245
+ParamRobeL = 1.49008e-05
+ParamRobeR = 1.49008e-05
 ParamRobeFuwa = 0.0
 ParamHeartMissOn = 0.0
 ParamHeartBackMissOn = 0.0
@@ -187,24 +183,24 @@ transparent_bg = true
 gui_disable_input = true
 render_target_update_mode = 4
 
-[node name="GDCubismEffectBreath" type="GDCubismEffectBreath" parent="Sprite2D/GDCubismUserModel"]
+[node name="GDCubismEffectBreath" type="GDCubismEffectBreath" parent="GDCubismUserModel"]
 
-[node name="GDCubismEffectEyeBlink" type="GDCubismEffectEyeBlink" parent="Sprite2D/GDCubismUserModel"]
+[node name="GDCubismEffectEyeBlink" type="GDCubismEffectEyeBlink" parent="GDCubismUserModel"]
 
-[node name="GDCubismEffectTargetPoint" type="GDCubismEffectTargetPoint" parent="Sprite2D/GDCubismUserModel"]
+[node name="GDCubismEffectTargetPoint" type="GDCubismEffectTargetPoint" parent="GDCubismUserModel"]
 
-[node name="GDCubismEffectCustom" type="GDCubismEffectCustom" parent="Sprite2D/GDCubismUserModel"]
+[node name="GDCubismEffectCustom" type="GDCubismEffectCustom" parent="GDCubismUserModel"]
 script = ExtResource("2_yrt8h")
 param_mouth_name = "ParamA"
 
-[node name="GDCubismEffectHitArea" type="GDCubismEffectHitArea" parent="Sprite2D/GDCubismUserModel"]
+[node name="GDCubismEffectHitArea" type="GDCubismEffectHitArea" parent="GDCubismUserModel"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMicrophone_crue8")
 autoplay = true
 bus = &"Voice"
 
-[connection signal="cubism_init" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_init"]
-[connection signal="cubism_process" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_process"]
-[connection signal="cubism_term" from="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" to="Sprite2D/GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_term"]
-[connection signal="hit_area_entered" from="Sprite2D/GDCubismUserModel/GDCubismEffectHitArea" to="." method="_on_gd_cubism_effect_hit_area_hit_area_entered"]
+[connection signal="cubism_init" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_init"]
+[connection signal="cubism_process" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_process"]
+[connection signal="cubism_term" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_term"]
+[connection signal="hit_area_entered" from="GDCubismUserModel/GDCubismEffectHitArea" to="." method="_on_gd_cubism_effect_hit_area_hit_area_entered"]

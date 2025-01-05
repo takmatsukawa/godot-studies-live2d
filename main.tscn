@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5tbifnp0jdpa"]
+[gd_scene load_steps=10 format=3 uid="uid://b5tbifnp0jdpa"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_6ypxn"]
 [ext_resource type="PackedScene" uid="uid://bch3cadf4ysrf" path="res://mao.tscn" id="1_earut"]
@@ -9,11 +9,16 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_rscbc"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_ktraq"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m24j2"]
+viewport_path = NodePath("GDCubismUserModel")
+
+[node name="Main" type="Node"]
 script = ExtResource("1_6ypxn")
 dialogue_resource = ExtResource("2_l5f72")
 
 [node name="Mao" parent="." instance=ExtResource("1_earut")]
+position = Vector2(298, 906)
+texture = SubResource("ViewportTexture_m24j2")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_uaf7l")
@@ -41,10 +46,10 @@ event = &"dialogue_finished"
 delay_in_seconds = "0.0"
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("8_ktraq")]
-offset_left = 831.0
-offset_top = 24.0
-offset_right = 1125.0
-offset_bottom = 497.0
+offset_left = 1717.0
+offset_top = 30.0
+offset_right = -31.0
+offset_bottom = -849.0
 initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="touched" from="Mao" to="." method="_on_mao_touched"]
