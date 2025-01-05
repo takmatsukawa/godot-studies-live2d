@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bch3cadf4ysrf"]
+[gd_scene load_steps=9 format=3 uid="uid://bch3cadf4ysrf"]
 
 [ext_resource type="Script" path="res://mao.gd" id="1_6jjbm"]
 [ext_resource type="Script" path="res://gd_cubism_effect_custom.gd" id="2_yrt8h"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_la044"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_tdgs0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_gb1qb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_2d7xs"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kebk5"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -19,9 +23,9 @@ anim_loop = false
 anim_loop_fade_in = true
 anim_expression = ""
 anim_motion = ""
-ParamAngleX = 6.80481
-ParamAngleY = -3.45866
-ParamAngleZ = 4.9106
+ParamAngleX = 6.36697
+ParamAngleY = -2.38294
+ParamAngleZ = 0.423764
 ParamCheek = 0.0
 ParamFaceInkOn = 0.0
 ParamEyeLOpen = 1.0
@@ -51,10 +55,10 @@ ParamMouthUp = 1.0
 ParamMouthDown = 0.0
 ParamMouthAngry = 0.0
 ParamMouthAngryLine = 0.0
-ParamBodyAngleX = 1.99377
+ParamBodyAngleX = -0.681352
 ParamBodyAngleY = 0.0
 ParamBodyAngleZ = 0.0
-ParamBreath = 8.50856e-05
+ParamBreath = 0.382783
 ParamLeftShoulderUp = 0.0
 ParamRightShoulderUp = 0.0
 ParamArmLA01 = 0.0
@@ -82,25 +86,25 @@ ParamHandRB = 0.0
 ParamAllX = 0.0
 ParamAllY = 0.0
 ParamAllRotate = 0.0
-ParamHairFront = 0.0207118
-ParamHairSideL = 0.0203922
-ParamHairSideR = 0.0203922
-ParamHairBack = 0.0205982
-ParamHairBackR = 0.0203996
-ParamHairBackL = 0.0203996
-ParamoHairMesh = 0.0223184
-ParamHairFrontFuwa = -0.00423503
-ParamHairSideFuwa = -0.00501663
-ParamHairBackFuwa = -0.00999493
-ParamWing = -0.00468961
-ParamRibbon = -0.0027555
-ParamHatBrim = -0.00440249
-ParamHatTop = 0.00356815
-ParamAccessory1 = -0.000309692
-ParamAccessory2 = 0.000429825
-ParamString = -0.000134245
-ParamRobeL = 1.49008e-05
-ParamRobeR = 1.49008e-05
+ParamHairFront = 0.006305
+ParamHairSideL = 0.00631263
+ParamHairSideR = 0.00631263
+ParamHairBack = 0.00648997
+ParamHairBackR = 0.00627533
+ParamHairBackL = 0.00627533
+ParamoHairMesh = 0.00886775
+ParamHairFrontFuwa = -0.000710096
+ParamHairSideFuwa = 0.000474702
+ParamHairBackFuwa = -0.000532359
+ParamWing = 0.00543968
+ParamRibbon = 0.00293762
+ParamHatBrim = 0.00240185
+ParamHatTop = 0.00385234
+ParamAccessory1 = 0.0046753
+ParamAccessory2 = -0.00471227
+ParamString = 0.00281605
+ParamRobeL = 0.00336615
+ParamRobeR = 0.00336615
 ParamRobeFuwa = 0.0
 ParamHeartMissOn = 0.0
 ParamHeartBackMissOn = 0.0
@@ -200,7 +204,50 @@ stream = SubResource("AudioStreamMicrophone_crue8")
 autoplay = true
 bus = &"Voice"
 
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_la044")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_tdgs0")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_gb1qb")
+
+[node name="To Angry" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("6_2d7xs")
+to = NodePath("../../Angry")
+event = &"made_her_angry"
+delay_in_seconds = "0.0"
+
+[node name="To Happy" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("6_2d7xs")
+to = NodePath("../../Happy")
+event = &"made_her_happy"
+delay_in_seconds = "0.0"
+
+[node name="Angry" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_gb1qb")
+
+[node name="To Idle" type="Node" parent="StateChart/Root/Angry"]
+script = ExtResource("6_2d7xs")
+to = NodePath("../../Idle")
+event = &"made_her_calm"
+delay_in_seconds = "0.0"
+
+[node name="Happy" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_gb1qb")
+
+[node name="To Idle" type="Node" parent="StateChart/Root/Happy"]
+script = ExtResource("6_2d7xs")
+to = NodePath("../../Idle")
+event = &"made_her_calm"
+delay_in_seconds = "0.0"
+
 [connection signal="cubism_init" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_init"]
 [connection signal="cubism_process" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_process"]
 [connection signal="cubism_term" from="GDCubismUserModel/GDCubismEffectCustom" to="GDCubismUserModel/GDCubismEffectCustom" method="_on_cubism_term"]
 [connection signal="hit_area_entered" from="GDCubismUserModel/GDCubismEffectHitArea" to="." method="_on_gd_cubism_effect_hit_area_hit_area_entered"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Angry" to="." method="_on_angry_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Happy" to="." method="_on_happy_state_entered"]

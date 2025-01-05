@@ -13,6 +13,7 @@ func _on_balloon_dialogue_finished() -> void:
 
 
 func _on_chatting_state_entered() -> void:
+	$Mao.start_angry()
 	var balloon: Node = Balloon.instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.dialogue_finished.connect(_on_balloon_dialogue_finished)

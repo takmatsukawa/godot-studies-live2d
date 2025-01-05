@@ -10,6 +10,16 @@ var pressed: bool = false
 var local_pos: Vector2 = Vector2.ZERO
 var adjust_pos: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+	var dict_motion = $GDCubismUserModel.get_motions()
+	for k in dict_motion:
+		for v in range(dict_motion[k]):
+			print("mao motion: k: %s v: %s " % [k, v])	
+			
+	for item in $GDCubismUserModel.get_expressions():
+		print("mao expression: %s" % item)
+
+			
 # Called when the node enters the scene tree for the first time.
 func _process(delta: float) -> void:
 	var vct_resolution = Vector2(get_window().size)        
@@ -48,3 +58,22 @@ func _input(event):
 
 func _on_gd_cubism_effect_hit_area_hit_area_entered(model: GDCubismUserModel, id: String) -> void:
 	touched.emit()
+
+func start_angry() -> void:
+	$StateChart.send_event("made_her_angry")
+
+func start_happy() -> void:
+	$StateChart.send_event("made_her_happy")
+
+
+func _on_idle_state_entered() -> void:
+	$GDCubismUserModel.start_motion("", 1, GDCubismUserModel.PRIORITY_FORCE)
+	$GDCubismUserModel.start_expression("exp_01")
+
+func _on_angry_state_entered() -> void:
+	$GDCubismUserModel.start_motion("Idle", 0, GDCubismUserModel.PRIORITY_FORCE)
+	$GDCubismUserModel.start_expression("exp_08")
+
+func _on_happy_state_entered() -> void:
+	$GDCubismUserModel.start_motion("", 0, GDCubismUserModel.PRIORITY_FORCE)
+	$GDCubismUserModel.start_expression("exp_04")
